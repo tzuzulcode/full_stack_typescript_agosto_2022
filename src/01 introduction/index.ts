@@ -39,6 +39,7 @@ class Persona{
             // calle:string,
             // numInterior?:number,
             // [key: number]:string, //cualquier tipo de propiedades numéricas que sean boolean
+            // Index signature
             [key: string]:string //Cualquier tipo de propiedades en string que almacenen un string
         } // public es un atajo a this.direccion = direccion
     ){}
@@ -64,3 +65,17 @@ const tzuzul2 /*:{name:string,direccion:{calle:string}}*/ = {
 
 tzuzul2.direccion.calle
 tzuzul.direccion.calle
+
+let user:{
+    // Propiedad de solo lectura:
+    readonly name: string
+} = {
+    name: "Tzuzul"
+}
+
+user.name
+
+// Omitir definir objetos vacíos
+let objeto :{}
+objeto = []
+objeto = 2
