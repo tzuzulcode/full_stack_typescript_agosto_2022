@@ -185,7 +185,7 @@ console.log(myFirstLanguage)
 // let b = 'apples and oranges'
 // const c = 'pineapples'
 // let d = [true, true, false]
-// let e = {type: 'ficus'}
+// let e:{type:string} = {type: 'ficus'}
 // let f = [1, false]
 // const g = [3]
 // let h = null
