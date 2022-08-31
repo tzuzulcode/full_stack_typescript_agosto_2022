@@ -96,3 +96,99 @@ console.log(
 // console.log(x.a())
 // let funcion = x.a
 // console.log(funcion())
+
+function printMessage(this: User,message:string){
+    console.log(message,this.name)
+}
+
+// Esto no es correcto
+// printMessage("Hola")
+
+printMessage.call({
+    name:"Tzuzul",
+    id:"abc123"
+},"Hola")
+
+// Generadors: generators
+function* createFibonacci(){ // Esto es un generador
+    let a = 0
+    let b = 1
+
+    while(true){ // Ciclo infinito
+        yield a; //Return, pero con pausa
+        // let aux = a
+        // a = b 
+        // b = aux + b
+        [a, b] = [b, a + b]
+    }
+}
+
+let fibonacciGenerator = createFibonacci()
+
+fibonacciGenerator.next() //0
+fibonacciGenerator.next() //1
+fibonacciGenerator.next() //1
+fibonacciGenerator.next() //2
+fibonacciGenerator.next() //3
+console.log(fibonacciGenerator.next()) //5
+console.log(fibonacciGenerator.next()) //8
+
+// Utilizar un generador para generar esta serie: 1,2,3,4,5,6,7...
+
+// Iterable: Cualquier objeto que contenga una propiedad llamada Symbol.iterator
+// Iterador: Cualquier objeto que define un método llamado next
+
+let numbersIterable = {
+    *[Symbol.iterator](){
+        for(let n=1;n<=10;n++){
+            yield n
+        }
+    }
+} // Arreglo
+
+for(let n of numbersIterable){
+    console.log(n)
+}
+
+const arrayIterable = [1,2,3,4,5]
+
+for(let n of arrayIterable){
+    console.log(n)
+}
+
+// Iterable -> spread operator, destructuring
+let allNumbersIterator = [...numbersIterable]
+let [one,two,...rest] = numbersIterable
+
+// Reto: Crear un iterable con los primeros 10 numeros de la serie de fibonacci
+
+// Call Signatures
+console.log(typeof greet) // (name:string)=>string
+
+// type Callback = (message:string) => void
+type Callback = {
+    // (message:string): void
+    // Overload: sobrecarga
+    (message:string, number: number):void
+    (message:string, number: number, id:string):void
+    (message:string, date:Date, id:string):void
+
+    // Nota: Cuando se tiene sobrecarga, el tipo se trabaja como union
+}
+
+function showDate(callback:Callback){
+    callback("Hola",123,"123abc")
+}
+
+// Contextual typing
+arrayIterable.map(n=>n*2)
+
+
+showDate((message,numberOrDate: Date | number,id?)=>{
+    console.log(message,numberOrDate,id)
+})
+
+
+// Reto:
+// Polimorfismo
+// Generics
