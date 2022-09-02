@@ -184,11 +184,6 @@ function showDate(callback:Callback){
 arrayIterable.map(n=>n*2)
 
 
-showDate((message,numberOrDate: Date | number,id?)=>{
+showDate((message,numberOrDate,id?)=>{
     console.log(message,numberOrDate,id)
 })
-
-
-// Reto:
-// Polimorfismo
-// Generics
