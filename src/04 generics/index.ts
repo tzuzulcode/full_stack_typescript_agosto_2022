@@ -4,7 +4,8 @@
 // Date[]
 
 type Filter = {
-    <T>(array:T[],f:(item:T)=>boolean):T[]
+    // Generic type default 
+    <T = number>(array:T[],f:(item:T)=>boolean):T[]
 }
 
 const filter:Filter = (array,f)=>{
@@ -32,3 +33,45 @@ filter([{name:"Tzuzul"},{name:"Juanito"}],(item)=>item.name!=="Tzuzul") //[1,2,3
 // Interfaces: Cuando se implementan o definen
 
 // Implementar la función de map -> map([1,2,3,4,5],item=>item*5)
+
+// type M = {
+//     <T>(array:T[],f:(item:T)=>any):any[]
+// }
+type M = {
+    <T,U>(array:T[],f:(item:T)=>U):U[]
+}
+
+const map: M = (array,f)=>{
+    let result = []
+    for(let i = 0; i<array.length;i++){
+        let item = f(array[i])
+        result.push(item)
+    }
+    return result
+}
+
+const result = map([1,2,3,4,5],(item)=>{
+    if(typeof item ==="number"){
+        return item*5
+    }
+
+    return "Message: "+item
+})
+const result2 = map(["1","2","3","4","5",5,5,5,5],(item)=>{
+    if(typeof item === "number"){
+        return item
+    }
+
+    return parseInt(item)
+})
+
+console.log(result2)
+
+let promise = new Promise<number>((resolve,reject)=>{
+    resolve(500)
+})
+
+promise
+.then((result)=>{
+    const operacion = result*5
+})
